@@ -39,11 +39,11 @@ jobs:
           import os, subprocess, tempfile, time
 
           script = "\n".join([
-            "set net:timeout 30",
-            "set net:max-retries 10",
-            "set net:reconnect-interval-base 5",
+            "set net:timeout 20",
+            "set net:max-retries 3",
+            "set net:reconnect-interval-base 3",
             "set net:reconnect-interval-multiplier 1",
-            "set net:reconnect-interval-max 15",
+            "set net:reconnect-interval-max 8",
             "set ssl:verify-certificate no",
             "set ftp:ssl-allow yes",
             f"open ftp://{os.environ['FTP_HOST']}",
