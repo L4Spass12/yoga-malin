@@ -151,14 +151,52 @@ declare module 'astro:content' {
 	>;
 
 	type ContentEntryMap = {
-		"blog": Record<string, {
-  id: string;
-  slug: string;
+		"blog": {
+"comment-commencer-la-meditation-en-10-minutes-par-jour.md": {
+	id: "comment-commencer-la-meditation-en-10-minutes-par-jour.md";
+  slug: "comment-commencer-la-meditation-en-10-minutes-par-jour";
   body: string;
   collection: "blog";
-  data: InferEntrySchema<"blog">;
-  render(): Render[".md"];
-}>;
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"les-10-postures-de-yoga-essentielles-pour-debutants.md": {
+	id: "les-10-postures-de-yoga-essentielles-pour-debutants.md";
+  slug: "les-10-postures-de-yoga-essentielles-pour-debutants";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"salutation-au-soleil-guide-complet-pas-a-pas.md": {
+	id: "salutation-au-soleil-guide-complet-pas-a-pas.md";
+  slug: "salutation-au-soleil-guide-complet-pas-a-pas";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+};
+"products": {
+"brique-yoga-liege.md": {
+	id: "brique-yoga-liege.md";
+  slug: "brique-yoga-liege";
+  body: string;
+  collection: "products";
+  data: InferEntrySchema<"products">
+} & { render(): Render[".md"] };
+"sangle-yoga-coton.md": {
+	id: "sangle-yoga-coton.md";
+  slug: "sangle-yoga-coton";
+  body: string;
+  collection: "products";
+  data: InferEntrySchema<"products">
+} & { render(): Render[".md"] };
+"tapis-yoga-premium.md": {
+	id: "tapis-yoga-premium.md";
+  slug: "tapis-yoga-premium";
+  body: string;
+  collection: "products";
+  data: InferEntrySchema<"products">
+} & { render(): Render[".md"] };
+};
 
 	};
 

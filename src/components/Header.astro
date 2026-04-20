@@ -22,8 +22,14 @@ const { transparent = false } = Astro.props;
     <!-- Desktop nav -->
     <nav class="hidden md:flex items-center gap-8 font-body text-sm font-medium">
       <a href="/" class="nav-link transition-colors">Accueil</a>
-      <a href="/#categories" class="nav-link transition-colors">Catégories</a>
       <a href="/blog" class="nav-link transition-colors">Blog</a>
+      {siteConfig.shop?.enabled && <a href="/boutique" class="nav-link transition-colors">Boutique</a>}
+      {siteConfig.shop?.enabled && (
+        <button class="snipcart-checkout nav-link transition-colors inline-flex items-center gap-1.5 relative" aria-label="Voir le panier">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="snipcart-items-count text-xs font-semibold"></span>
+        </button>
+      )}
       <a href="/#a-propos" class="btn-primary">À propos</a>
     </nav>
 
@@ -49,8 +55,13 @@ const { transparent = false } = Astro.props;
     class="hidden md:hidden bg-cream border-t border-beige px-6 py-4 flex-col gap-4 font-body text-sm font-medium"
   >
     <a href="/" class="block py-2 text-dark/70 hover:text-teal transition-colors">Accueil</a>
-    <a href="/#categories" class="block py-2 text-dark/70 hover:text-teal transition-colors">Catégories</a>
     <a href="/blog" class="block py-2 text-dark/70 hover:text-teal transition-colors">Blog</a>
+    {siteConfig.shop?.enabled && <a href="/boutique" class="block py-2 text-dark/70 hover:text-teal transition-colors">Boutique</a>}
+    {siteConfig.shop?.enabled && (
+      <button class="snipcart-checkout block py-2 text-dark/70 hover:text-teal transition-colors text-left">
+        Panier (<span class="snipcart-items-count">0</span>)
+      </button>
+    )}
     <a href="/#a-propos" class="btn-primary mt-2 justify-center">À propos</a>
   </nav>
 </header>

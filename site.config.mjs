@@ -34,6 +34,13 @@ const config = {
     // Mot-clé ajouté aux recherches Unsplash pour cadrer les images
     unsplashContext: "yoga meditation wellness",
   },
+
+  // Boutique Snipcart (laisser publicKey vide '' pour désactiver la boutique)
+  shop: {
+    enabled: true,
+    publicKey: 'MmEzOWY1N2YtNTY3Yi00NGRlLWJkY2EtOTYxNjg2YWZiYjY4NjM5MTIyODc4MDUwNjU5Mzkx',
+    currency: 'EUR',
+  },
 };
 
 export default config;

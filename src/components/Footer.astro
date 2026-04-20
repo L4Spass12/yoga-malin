@@ -31,7 +31,7 @@ const currentYear = new Date().getFullYear();
         <ul class="space-y-3 font-body text-sm">
           <li><a href="/" class="hover:text-cream transition-colors">Accueil</a></li>
           <li><a href="/blog" class="hover:text-cream transition-colors">Blog</a></li>
-          <li><a href="/#categories" class="hover:text-cream transition-colors">Catégories</a></li>
+          {siteConfig.shop?.enabled && <li><a href="/boutique" class="hover:text-cream transition-colors">Boutique</a></li>}
           <li><a href="/#a-propos" class="hover:text-cream transition-colors">À propos</a></li>
         </ul>
       </div>
