@@ -86,7 +86,7 @@ Même les pratiquants expérimentés commettent certaines erreurs qui limitent l
 
 ### Adapter la pratique à son niveau
 
-La beauté du *Surya Namaskar* est sa **modularité totale**. Un débutant peut poser les genoux en planche, utiliser des briques de yoga pour la flexion avant, ou raccourcir les temps de maintien. Si vous souhaitez vous familiariser avec d'autres bases avant d'aborder cette séquence, nous vous invitons à consulter notre article sur les [postures de yoga essentielles](/blog/les-10-postures-de-yoga-essentiels-pour-debutants/) pour débutants, une excellente porte d'entrée dans la pratique.
+La beauté du *Surya Namaskar* est sa **modularité totale**. Un débutant peut poser les genoux en planche, utiliser des briques de yoga pour la flexion avant, ou raccourcir les temps de maintien. Si vous souhaitez vous familiariser avec d'autres bases avant d'aborder cette séquence, nous vous invitons à consulter notre article sur les [postures de yoga essentielles](/blog/les-10-postures-de-yoga-essentielles-pour-debutants/) pour débutants, une excellente porte d'entrée dans la pratique.
 
 > "Il n'existe pas de mauvaise façon de commencer - il existe seulement la décision de commencer."
 
