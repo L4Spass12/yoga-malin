@@ -1,0 +1,210 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import BlogPreview from '../components/BlogPreview.astro';
+import Footer from '../components/Footer.astro';
+import Icon from '../components/Icon.astro';
+import siteConfig from '../../site.config.mjs';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog');
+const recentPosts = allPosts
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+function catToSlug(cat) {
+  return cat.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-');
+}
+
+const categoryDescriptions = {
+  'Postures': 'Asanas pour tous les niveaux, du débutant au yogi confirmé.',
+  'Méditation': 'Pleine conscience, relaxation guidée et techniques apaisantes.',
+  'Respiration': 'Pranayama et exercices respiratoires pour calmer l\'esprit.',
+  'Nutrition': 'Alimentation saine, principes ayurvédiques et équilibre.',
+  'Bien-être': 'Routines quotidiennes et habitudes pour une vie plus sereine.',
+};
+
+const categoryIcons = {
+  'Postures': 'leaf',
+  'Méditation': 'heart',
+  'Respiration': 'sparkle',
+  'Nutrition': 'bowl',
+  'Bien-être': 'star',
+};
+
+const faqs = [
+  {
+    q: 'Puis-je commencer le yoga sans expérience ?',
+    a: `Oui, absolument. Le yoga s'adresse à tous, quel que soit votre âge, votre souplesse ou votre condition physique. Sur ${siteConfig.name}, nous proposons des guides pas à pas pensés pour les débutants : postures simples, routines courtes de 10 à 15 minutes, et explications détaillées pour démarrer sereinement depuis chez vous.`,
+  },
+  {
+    q: 'Combien de temps par jour pratiquer le yoga ?',
+    a: `Dix à vingt minutes par jour suffisent pour ressentir les premiers bienfaits. La régularité compte davantage que la durée : une pratique courte mais quotidienne apporte plus de résultats qu'une séance longue une fois par semaine.`,
+  },
+  {
+    q: 'Le yoga remplace-t-il une séance de sport ?',
+    a: `Certains styles dynamiques comme le Vinyasa, l'Ashtanga ou le Power Yoga offrent une vraie dépense énergétique et sollicitent le cardio. D'autres styles plus doux (Hatha, Yin) sont davantage centrés sur l'étirement, la respiration et la relaxation.`,
+  },
+  {
+    q: 'Quel matériel minimum pour débuter ?',
+    a: `Un simple tapis de yoga suffit. Une tenue confortable, une bouteille d'eau et éventuellement une brique ou une sangle peuvent compléter la pratique, mais ne sont pas indispensables au démarrage.`,
+  },
+  {
+    q: 'Méditation et yoga, est-ce la même chose ?',
+    a: `Non. Le yoga intègre traditionnellement huit piliers, dont la méditation (Dhyana) et la respiration (Pranayama). La pratique posturale (Asana) que l'on connaît en Occident n'est qu'une partie du yoga. Méditer régulièrement approfondit les bénéfices de la pratique posturale.`,
+  },
+];
+
+const SITE_URL = siteConfig.url;
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: siteConfig.name,
+  description: siteConfig.description,
+  url: SITE_URL,
+  inLanguage: 'fr-FR',
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(f => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<BaseLayout
+  title={`${siteConfig.name} – Yoga, méditation et bien-être au quotidien`}
+  description={siteConfig.description}
+  jsonLd={[websiteSchema, faqSchema]}
+>
+  <Header transparent />
+
+  <main>
+    <!-- Hero -->
+    <section class="relative bg-teal text-cream pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
+      <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 20% 30%, #FDF8F5 1px, transparent 1px), radial-gradient(circle at 80% 70%, #E67E50 1px, transparent 1px); background-size: 60px 60px;"></div>
+      <div class="relative max-w-4xl mx-auto px-6 text-center">
+        <span class="tag tag-outline-light mb-6">Le blog yoga et bien-être</span>
+        <h1 class="font-display text-4xl md:text-6xl lg:text-7xl leading-tight mb-6">
+          Yoga, méditation et<br />
+          <span class="text-terracotta">bien-être</span> au quotidien
+        </h1>
+        <p class="font-body text-lg md:text-xl text-cream/80 max-w-2xl mx-auto leading-relaxed mb-10">
+          Postures, respiration, méditation, nutrition : tout ce qu'il faut savoir pour cultiver une pratique régulière et trouver l'équilibre, chez vous, à votre rythme.
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-4">
+          <a href="/blog" class="btn-primary">Découvrir le blog</a>
+          <a href="#categories" class="font-body text-sm font-semibold text-cream/80 hover:text-cream transition-colors">Explorer les catégories →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- À propos / SEO intro -->
+    <section id="a-propos" class="py-16 md:py-24 bg-cream">
+      <div class="max-w-4xl mx-auto px-6">
+        <div class="text-center mb-12">
+          <span class="tag tag-beige mb-4">À propos</span>
+          <h2 class="section-title mt-4 mb-6">
+            Une approche <span class="text-terracotta">accessible</span> du yoga
+          </h2>
+        </div>
+        <div class="prose prose-lg max-w-none prose-p:font-body prose-p:text-dark/75 prose-p:leading-relaxed prose-strong:text-dark">
+          <p>
+            <strong>{siteConfig.name}</strong> est un site de référence francophone dédié au yoga, à la méditation et au bien-être global. Notre mission : rendre la pratique du yoga <strong>accessible à toutes et tous</strong>, du débutant curieux au pratiquant avancé, à travers des guides clairs, concrets et fondés sur les traditions yogiques millénaires.
+          </p>
+          <p>
+            Chaque semaine, nous publions des articles approfondis sur les <strong>postures (asanas)</strong>, les <strong>techniques de respiration (pranayama)</strong>, la <strong>méditation de pleine conscience</strong>, la <strong>nutrition équilibrée</strong> et les <strong>routines quotidiennes</strong> qui soutiennent un mode de vie serein. Que vous cherchiez à soulager une douleur au dos, améliorer votre sommeil, gérer votre stress ou approfondir votre pratique, vous trouverez ici des ressources fiables et bienveillantes.
+          </p>
+          <p>
+            Le yoga ne demande ni souplesse particulière ni matériel coûteux. Un tapis, quelques minutes par jour et de la régularité suffisent pour <strong>ressentir les premiers bienfaits</strong> : moins de tensions, plus de concentration, un sommeil de meilleure qualité et une relation plus apaisée à son corps.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Catégories -->
+    <section id="categories" class="py-16 md:py-24 bg-beige/30">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="text-center mb-14">
+          <span class="tag tag-terracotta mb-4">Explorer</span>
+          <h2 class="section-title mt-4 mb-4">
+            Cinq univers à <span class="text-terracotta">découvrir</span>
+          </h2>
+          <p class="section-subtitle max-w-xl mx-auto">
+            Du débutant au yogi confirmé, trouvez les ressources qui correspondent à votre pratique.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {siteConfig.categories.map(cat => (
+            <a
+              href={`/blog/categorie/${catToSlug(cat)}`}
+              class="group block bg-white rounded-3xl p-8 shadow-sm hover:shadow-lg transition-all duration-200 hover:-translate-y-1"
+            >
+              <div class="w-12 h-12 rounded-2xl bg-teal/10 text-teal flex items-center justify-center mb-5 group-hover:bg-teal group-hover:text-cream transition-colors">
+                <Icon name={categoryIcons[cat] ?? 'sparkle'} size={24} strokeWidth={1.75} />
+              </div>
+              <h3 class="font-display text-xl text-dark mb-2 group-hover:text-teal transition-colors">
+                {cat}
+              </h3>
+              <p class="font-body text-sm text-dark/60 leading-relaxed">
+                {categoryDescriptions[cat] ?? `Articles et conseils autour de ${cat.toLowerCase()}.`}
+              </p>
+              <span class="inline-flex items-center gap-1 mt-5 font-body text-xs font-semibold text-terracotta uppercase tracking-wider">
+                Explorer →
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog preview -->
+    {recentPosts.length > 0 && <BlogPreview posts={recentPosts} />}
+
+    <!-- FAQ -->
+    <section class="py-16 md:py-24 bg-cream">
+      <div class="max-w-3xl mx-auto px-6">
+        <div class="text-center mb-12">
+          <span class="tag tag-beige mb-4">Questions fréquentes</span>
+          <h2 class="section-title mt-4 mb-4">
+            Vos questions, nos <span class="text-terracotta">réponses</span>
+          </h2>
+        </div>
+        <div class="space-y-4">
+          {faqs.map(f => (
+            <details class="group bg-white rounded-2xl p-6 shadow-sm open:shadow-md transition-shadow">
+              <summary class="font-display text-lg text-dark cursor-pointer list-none flex items-start justify-between gap-4">
+                <span class="flex-1">{f.q}</span>
+                <span class="text-terracotta text-2xl leading-none transition-transform group-open:rotate-45 shrink-0">+</span>
+              </summary>
+              <p class="font-body text-dark/70 leading-relaxed mt-4">
+                {f.a}
+              </p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA final -->
+    <section class="py-20 bg-teal text-cream">
+      <div class="max-w-3xl mx-auto px-6 text-center">
+        <h2 class="font-display text-3xl md:text-4xl leading-tight mb-4">
+          Prêt·e à approfondir votre <span class="text-terracotta">pratique</span> ?
+        </h2>
+        <p class="font-body text-cream/80 text-lg mb-8 max-w-xl mx-auto">
+          Explorez nos derniers articles pour progresser semaine après semaine, à votre rythme.
+        </p>
+        <a href="/blog" class="btn-primary">Lire le blog</a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
