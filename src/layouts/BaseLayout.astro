@@ -141,7 +141,7 @@ const allSchemas = [...baseSchemas, ...extraSchemas];
         <script is:inline define:vars={{ publicKey: siteConfig.shop.publicKey, currency: siteConfig.shop.currency }}>
           window.SnipcartSettings = {
             publicApiKey: publicKey,
-            loadStrategy: 'on-user-interaction',
+            loadStrategy: 'on-page-load',
             currency: currency,
             version: '3.7.1',
           };
