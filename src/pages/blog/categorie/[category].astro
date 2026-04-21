@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Icon from '../../../components/Icon.astro';
 import siteConfig from '../../../../site.config.mjs';
+import { unsplashSrcset, unsplashAt } from '../../../lib/image';
 
 export function catToSlug(cat: string) {
   return cat.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-');
@@ -74,7 +75,14 @@ const catSlug = catToSlug(cat);
           <article class="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-1">
             <div class="aspect-video bg-beige flex items-center justify-center relative overflow-hidden">
               {post.data.image
-                ? <img src={post.data.image} alt={post.data.imageAlt ?? post.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+                ? <img
+                    src={unsplashAt(post.data.image, 600)}
+                    srcset={unsplashSrcset(post.data.image, [400, 600, 800])}
+                    sizes="(max-width: 768px) calc(100vw - 32px), (max-width: 1024px) calc(50vw - 48px), 380px"
+                    alt={post.data.imageAlt ?? post.data.title}
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    width="800" height="450" loading="lazy"
+                  />
                 : <div class="text-terracotta/40"><Icon name="fork-knife" size={64} strokeWidth={1.25} /></div>
               }
               <div class="absolute top-3 left-3">

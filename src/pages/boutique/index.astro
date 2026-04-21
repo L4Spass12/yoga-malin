@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Icon from '../../components/Icon.astro';
 import { getCollection } from 'astro:content';
 import siteConfig from '../../../site.config.mjs';
+import { unsplashSrcset, unsplashAt } from '../../lib/image';
 
 const allProducts = await getCollection('products');
 const products = allProducts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
@@ -74,7 +75,14 @@ const breadcrumbSchema = {
             <a href={`/boutique/${featured.slug}`} class="group block bg-teal rounded-3xl overflow-hidden mb-10 md:mb-14 hover:opacity-95 transition-opacity">
               <div class="grid md:grid-cols-5">
                 <div class="md:col-span-3 aspect-video bg-teal/80 flex items-center justify-center">
-                  <img src={featured.data.image} alt={featured.data.imageAlt ?? featured.data.name} class="w-full h-full object-cover" width="1200" height="676" fetchpriority="high" decoding="async" />
+                  <img
+                    src={unsplashAt(featured.data.image, 800)}
+                    srcset={unsplashSrcset(featured.data.image)}
+                    sizes="(max-width: 768px) 100vw, 60vw"
+                    alt={featured.data.imageAlt ?? featured.data.name}
+                    class="w-full h-full object-cover"
+                    width="1200" height="676" fetchpriority="high" decoding="async"
+                  />
                 </div>
                 <div class="md:col-span-2 p-6 md:p-10 flex flex-col justify-center">
                   <div class="flex items-center gap-2 mb-4">
@@ -121,7 +129,14 @@ const breadcrumbSchema = {
               <article class="product-card group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-1" data-category={product.data.category}>
                 <a href={`/boutique/${product.slug}`} class="block">
                   <div class="aspect-video bg-beige flex items-center justify-center relative overflow-hidden">
-                    <img src={product.data.image} alt={product.data.imageAlt ?? product.data.name} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" width="800" height="450" loading="lazy" sizes="(max-width: 768px) calc(100vw - 32px), (max-width: 1024px) calc(50vw - 48px), 380px" />
+                    <img
+                      src={unsplashAt(product.data.image, 600)}
+                      srcset={unsplashSrcset(product.data.image, [400, 600, 800])}
+                      sizes="(max-width: 768px) calc(100vw - 32px), (max-width: 1024px) calc(50vw - 48px), 380px"
+                      alt={product.data.imageAlt ?? product.data.name}
+                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      width="800" height="450" loading="lazy"
+                    />
                     <div class="absolute top-3 left-3">
                       <span class="tag tag-teal">{product.data.category}</span>
                     </div>

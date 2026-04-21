@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Icon from '../../components/Icon.astro';
 import { getCollection } from 'astro:content';
 import siteConfig from '../../../site.config.mjs';
+import { unsplashSrcset, unsplashAt } from '../../lib/image';
 
 export async function getStaticPaths() {
   const products = await getCollection('products');
@@ -74,7 +75,14 @@ const breadcrumbSchema = {
       <div class="grid lg:grid-cols-2 gap-10 lg:gap-14">
         <!-- Image -->
         <div class="rounded-3xl overflow-hidden bg-beige aspect-square">
-          <img src={image} alt={imageAlt ?? name} class="w-full h-full object-cover" width="1200" height="1200" fetchpriority="high" decoding="async" />
+          <img
+            src={unsplashAt(image, 800)}
+            srcset={unsplashSrcset(image, [400, 600, 800, 1200])}
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            alt={imageAlt ?? name}
+            class="w-full h-full object-cover"
+            width="1200" height="1200" fetchpriority="high" decoding="async"
+          />
         </div>
 
         <!-- Info + CTA -->
@@ -177,7 +185,14 @@ const breadcrumbSchema = {
             {related.map(p => (
               <a href={`/boutique/${p.slug}`} class="group block bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all hover:-translate-y-1">
                 <div class="aspect-video bg-beige overflow-hidden">
-                  <img src={p.data.image} alt={p.data.imageAlt ?? p.data.name} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+                  <img
+                    src={unsplashAt(p.data.image, 400)}
+                    srcset={unsplashSrcset(p.data.image, [400, 600])}
+                    sizes="(max-width: 640px) 100vw, 33vw"
+                    alt={p.data.imageAlt ?? p.data.name}
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                  />
                 </div>
                 <div class="p-4">
                   <span class="font-body text-xs text-terracotta font-semibold uppercase tracking-wide">{p.data.category}</span>
