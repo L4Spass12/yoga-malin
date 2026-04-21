@@ -140,17 +140,11 @@ const allSchemas = [...baseSchemas, ...extraSchemas];
           }
           .snipcart-cart-button--highlight { background: #E67E50 !important; }
 
-          /* Snipcart modal sits below the fixed site header so nothing overlaps */
-          #snipcart,
-          #snipcart .snipcart,
-          #snipcart .snipcart-modal,
-          #snipcart .snipcart-modal__container,
-          #snipcart .snipcart__box--slide,
-          #snipcart .snipcart-layout {
+          /* Snipcart modal sits below the fixed site header so nothing overlaps.
+             Apply the offset ONLY on the outermost fixed overlay to avoid
+             stacking the offset on every nested container. */
+          #snipcart .snipcart-modal {
             top: var(--header-h) !important;
-          }
-          #snipcart .snipcart-modal__container,
-          #snipcart .snipcart-layout {
             height: calc(100vh - var(--header-h)) !important;
             max-height: calc(100vh - var(--header-h)) !important;
           }
