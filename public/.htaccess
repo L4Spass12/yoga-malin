@@ -32,10 +32,22 @@ RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
   ExpiresActive On
   ExpiresByType image/webp "access plus 1 year"
   ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
   ExpiresByType image/svg+xml "access plus 1 year"
   ExpiresByType text/css "access plus 1 year"
   ExpiresByType application/javascript "access plus 1 year"
   ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>
+
+# Cache-Control immutable pour les assets fingerprintés générés par Astro
+<IfModule mod_headers.c>
+  <FilesMatch "\.(css|js|woff2|webp|png|jpg|jpeg|svg)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  # HTML : toujours revalider (courte durée) pour pouvoir déployer
+  <FilesMatch "\.html$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
 </IfModule>
 
 # Compression gzip
