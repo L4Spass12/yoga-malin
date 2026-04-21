@@ -1,7 +1,5 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
 import Icon from '../../components/Icon.astro';
 import { getCollection } from 'astro:content';
 import siteConfig from '../../../site.config.mjs';
@@ -41,9 +39,7 @@ const breadcrumbSchema = {
   description={`Découvrez notre sélection de tapis, briques, sangles et accessoires yoga choisis avec soin pour accompagner votre pratique.`}
   jsonLd={[collectionSchema, breadcrumbSchema]}
 >
-  <Header />
-
-  <main class="pt-24">
+  <div>
     <section class="max-w-6xl mx-auto px-4 sm:px-6 py-10 md:py-16">
       <!-- Page header -->
       <div class="text-center mb-14">
@@ -157,9 +153,7 @@ const breadcrumbSchema = {
         </>
       )}
     </section>
-  </main>
-
-  <Footer />
+  </div>
 </BaseLayout>
 
 <script is:inline>

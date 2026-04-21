@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Footer from '../../components/Footer.astro';
 import Icon from '../../components/Icon.astro';
 import { getCollection } from 'astro:content';
 import siteConfig from '../../../site.config.mjs';
@@ -50,19 +49,7 @@ const breadcrumbSchema = {
   description="Découvrez nos articles sur la cuisine à domicile, les chefs privés, les conseils gastronomiques et les tendances culinaires."
   jsonLd={[collectionSchema, breadcrumbSchema]}
 >
-  <!-- Header -->
-  <header class="sticky top-0 z-50 bg-cream/90 backdrop-blur-sm border-b border-beige">
-    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-      <a href="/" class="font-display text-xl text-teal">{siteConfig.logoPrefix}<span class="text-terracotta">{siteConfig.logoSuffix}</span></a>
-      <nav class="hidden md:flex items-center gap-6 font-body text-sm font-medium text-dark/70">
-        <a href="/" class="hover:text-teal transition-colors">Accueil</a>
-        <a href="/blog" class="text-teal font-semibold">Blog</a>
-        <a href="/#download" class="btn-primary text-xs px-4 py-2">Télécharger</a>
-      </nav>
-    </div>
-  </header>
-
-  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-10 md:py-16">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-10 md:py-16">
     <!-- Page header -->
     <div class="text-center mb-14">
       <span class="tag tag-beige mb-4">Le blog {siteConfig.name}</span>
@@ -161,7 +148,5 @@ const breadcrumbSchema = {
         <p class="font-body text-dark/50">D'autres articles arrivent bientôt…</p>
       </div>
     )}
-  </main>
-
-  <Footer />
+  </div>
 </BaseLayout>

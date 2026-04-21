@@ -173,6 +173,13 @@ declare module 'astro:content' {
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".md"] };
+"yoga-du-matin-routine-energisante-en-15-minutes.md": {
+	id: "yoga-du-matin-routine-energisante-en-15-minutes.md";
+  slug: "yoga-du-matin-routine-energisante-en-15-minutes";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
 };
 "products": {
 "brique-yoga-liege.md": {

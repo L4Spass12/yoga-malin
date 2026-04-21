@@ -1,6 +1,8 @@
 ---
 import '../styles/global.css';
 import siteConfig from '../../site.config.mjs';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 
 interface Props {
   title: string;
@@ -138,13 +140,19 @@ const allSchemas = [...baseSchemas, ...extraSchemas];
           }
           .snipcart-cart-button--highlight { background: #E67E50 !important; }
 
-          /* Keep the site header visible and above the Snipcart modal */
-          #site-header { z-index: 10000; }
-
-          /* Start the Snipcart modal below the fixed site header so nothing overlaps */
-          #snipcart { top: 72px !important; }
-          @media (min-width: 768px) {
-            #snipcart { top: 80px !important; }
+          /* Snipcart modal sits below the fixed site header so nothing overlaps */
+          #snipcart,
+          #snipcart .snipcart,
+          #snipcart .snipcart-modal,
+          #snipcart .snipcart-modal__container,
+          #snipcart .snipcart__box--slide,
+          #snipcart .snipcart-layout {
+            top: var(--header-h) !important;
+          }
+          #snipcart .snipcart-modal__container,
+          #snipcart .snipcart-layout {
+            height: calc(100vh - var(--header-h)) !important;
+            max-height: calc(100vh - var(--header-h)) !important;
           }
         `} />
         <script is:inline define:vars={{ publicKey: siteConfig.shop.publicKey, currency: siteConfig.shop.currency }}>
@@ -159,6 +167,10 @@ const allSchemas = [...baseSchemas, ...extraSchemas];
     )}
   </head>
   <body>
-    <slot />
+    <Header />
+    <main style="padding-top: var(--header-h);">
+      <slot />
+    </main>
+    <Footer />
   </body>
 </html>

@@ -1,8 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro';
 import BlogPreview from '../components/BlogPreview.astro';
-import Footer from '../components/Footer.astro';
 import Icon from '../components/Icon.astro';
 import siteConfig from '../../site.config.mjs';
 import { getCollection } from 'astro:content';
@@ -82,11 +80,8 @@ const faqSchema = {
   description={siteConfig.description}
   jsonLd={[websiteSchema, faqSchema]}
 >
-  <Header transparent />
-
-  <main>
     <!-- Hero -->
-    <section class="relative bg-teal text-cream pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
+    <section class="relative bg-teal text-cream pt-20 pb-20 md:pt-28 md:pb-28 overflow-hidden">
       <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 20% 30%, #FDF8F5 1px, transparent 1px), radial-gradient(circle at 80% 70%, #E67E50 1px, transparent 1px); background-size: 60px 60px;"></div>
       <div class="relative max-w-4xl mx-auto px-6 text-center">
         <span class="tag tag-outline-light mb-6">Le blog yoga et bien-être</span>
@@ -204,7 +199,4 @@ const faqSchema = {
         <a href="/blog" class="btn-primary">Lire le blog</a>
       </div>
     </section>
-  </main>
-
-  <Footer />
 </BaseLayout>
