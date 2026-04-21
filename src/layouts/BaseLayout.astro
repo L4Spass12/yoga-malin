@@ -137,6 +137,12 @@ const allSchemas = [...baseSchemas, ...extraSchemas];
             --font-body: 'Inter', sans-serif;
           }
           .snipcart-cart-button--highlight { background: #E67E50 !important; }
+
+          /* Ensure Snipcart modal is above everything (incl. fixed site header) */
+          #snipcart { z-index: 9999; }
+
+          /* Hide the site's fixed header while the Snipcart modal is open */
+          body:has(#snipcart:not([hidden])) #site-header { display: none; }
         `} />
         <script is:inline define:vars={{ publicKey: siteConfig.shop.publicKey, currency: siteConfig.shop.currency }}>
           window.SnipcartSettings = {
